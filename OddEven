@@ -1,0 +1,78 @@
+
+import java.util.*;
+
+public class OddEven {
+    public static void main (String[] args){
+        Scanner input = new Scanner(System.in);
+        System.out.println("Enter a 10-digit number: ");
+        String strInput = input.nextLine();
+        int [] myInput = new int [10];  //empty, all 0
+        for(int i= 0; i <10; i ++){
+            myInput[i] = Character.getNumericValue(strInput.charAt(i));
+            System.out.print(myInput[i]); //int array
+        }
+        System.out.println();
+        for (int i = 0; i < 10; i ++){
+            if (myInput[i] == 0){
+                System.out.println("invalid");
+            }
+        }
+        int weightedSum = 30 * myInput[0]- 29 * myInput[1] + 28 * myInput[2] - 
+        		27 * myInput[3] + 26 *myInput[4] -25 *myInput[5] 
+        				+ 24 *myInput[6]-23 *myInput[7] +22*myInput[8]+myInput[9];
+        System.out.println("weightedSum = " + weightedSum);
+        //--------------------------------------------------
+        int cases = 0;
+        if (weightedSum %2 != 0 ){
+            cases= 1;
+        }
+        if (weightedSum %2 == 0) {
+            cases=2;
+        }      
+        //---------------------------------------------------
+        int temp = 0;
+        int n = myInput.length;
+        if (cases==1){
+            System.out.println("is odd");
+            for(int i =0 ; i <n; i ++){
+                for (int j= 1; j <(n-i); j ++){
+                    if (myInput[j-1]>myInput[j]){
+                        temp = myInput[j-1];
+                        myInput[j-1]= myInput[j];
+                        myInput[j]=temp;
+
+                    }
+                }
+            }
+            System.out.println("Sorted digits : ");
+            for(int i=0; i < myInput.length; i++){
+                System.out.print(myInput[i] + " ");
+            }
+            System.out.println();
+            System.out.println("The smallest two-digit number is " + myInput[0]+myInput[1]);
+            System.out.println();
+
+        }  //end of cases 1
+        
+        if (cases==2){
+            System.out.println("is even");
+            for(int i =0 ; i <n; i ++){
+                for (int j= 1; j <(n-i); j ++){
+                    if (myInput[j-1]>myInput[j]){
+                        temp = myInput[j-1];
+                        myInput[j-1]= myInput[j];
+                        myInput[j]=temp;
+                    }
+                }
+            }
+            System.out.println("Sorted digits : ");
+            for(int i=0; i < myInput.length; i++){
+                System.out.print(myInput[i] + " ");
+            }
+            System.out.println();
+            System.out.println("The largest two-digit number is "+ myInput[9]+ myInput[8]);
+            System.out.println();
+        }  //end of cases 2
+
+    }
+}
