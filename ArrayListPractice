@@ -1,0 +1,78 @@
+
+import java.util.*;
+import java.util.ArrayList;
+
+public class AL {
+
+    public static void minmax(int gap) {
+        if (gap < 0) {
+            System.out.println("Error – the lower limit is larger than the upper limit.");
+        }
+        if (gap == 0) {
+            System.out.println("Error – the lower limit is equal to the upper limit.");
+        }
+
+    }
+
+    public static void main(String[] args) {
+        Scanner input = new Scanner(System.in);
+        System.out.println("Input a string : ");
+        System.out.println("For example: ");
+        System.out.println("Whatever is worth doing is worth doing well");
+        String yourStr = input.nextLine();
+        System.out.println("Input a pattern :");
+        String pattern = input.nextLine();
+        int gap = 0;
+
+        for (int i = 0; i < pattern.length(); i++) {
+            if (pattern.charAt(i) == '{') {
+                System.out.println("!");
+                char tempMin = pattern.charAt(i + 1);
+                System.out.println(tempMin);
+                char tempMax = pattern.charAt(i + 3);
+                System.out.println(tempMax);
+                gap = Character.getNumericValue(tempMax) - Character.getNumericValue(tempMin);
+                minmax(gap);
+                //call the method to check whether the upper or lower limit is accepatable
+            }
+        }  //end of the for loop
+        ArrayList<Character> charList = new ArrayList<Character>();
+        ArrayList<Character> patternList = new ArrayList<Character>();
+        ArrayList<String> strList = new ArrayList<String>();
+
+        String myStr = yourStr.replaceAll(" ", "");
+        //Whateverisworthdoingisworthdoingwell
+        String myPattern = pattern.replaceAll(" ", "");
+        //well
+
+
+        for (int i = 0; i < myStr.length(); i++) {
+            char temp = myStr.charAt(i);
+            charList.add(temp);
+        }
+        for (int i = 0; i < myPattern.length(); i++) {
+            char temp = myPattern.charAt(i);
+            patternList.add(temp);
+        }
+        System.out.println(charList);
+        //[W, h, a, t, e, v, e, r, i, s, w, o, r, t, h, d, o, i, n, g, i, s, w, o, r, t, h, d, o, i, n, g, w, e, l, l]
+        System.out.println(patternList);
+        //[w, e, l, l]
+        //---------------------------------------------
+        strList.add(myStr);
+        strList.add(myPattern);
+
+
+        System.out.println("Is there a match?");
+        if (myStr.contains(myPattern)) {
+            System.out.print("  True");
+        } else {
+            System.out.print("  False");
+        }
+
+
+    }
+
+
+}
+
