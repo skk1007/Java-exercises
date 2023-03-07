@@ -1,0 +1,161 @@
+
+import java.util.*;
+import java.util.ArrayList;
+public class NearSelfDivide {
+    public static int Leng(int g){
+    	// to check the amount of number the user input
+    int w = 1;
+    int y = 1;
+    int count = -1;
+    while (y >=1) {
+        if(y==1){
+            y = g /w;
+            w *= 10;
+            count ++;
+        }
+        else if (y>1){
+        //    System.out.print(y);
+        //    System.out.print( " ");
+            y = g /w;
+            w *= 10;
+            count ++;
+        }
+    }
+    System.out.println("digit : " + count);
+    return count;
+    }  //end of Leng
+    //-------------------------------------------------------------------------
+    public static void checkK (int k, int maxNum){
+    	// to check whether the k meets my requirement
+        if (k > maxNum) {
+            System.out.println("Error – the k is greater than the max digit (n) of numbers in the array");
+        }
+        if (k>0 && k <=maxNum){
+            System.out.println("K is acceptable");
+        }
+        if (k <=0 ){
+            System.out.println("Error - K must be positive");
+        }
+
+    }
+
+    public static void main(String[]args) {
+        Scanner input = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
+        ArrayList<Integer> myList = new ArrayList<Integer>();
+        System.out.println("Input an array of numbers and end with any non-number string : ");
+        System.out.println("For example : 123 34 23135 777 w");
+        while (input.hasNextInt()) {
+            myList.add(input.nextInt());
+        }
+        System.out.println(myList);
+        int size = myList.size();
+        System.out.println("Amount of numbers : " + size);
+
+        //----------------------------------------------
+        System.out.println("K: ");
+        int kk = scanner.nextInt();
+        int k = kk;
+        int count2;
+        ArrayList<Integer> length = new ArrayList<Integer>();
+        for (int i = 0; i < size; i++) {
+            int s = size;
+            int y = myList.get(i);
+            System.out.println(y);
+            count2 = Leng(y);
+            length.add(count2);
+            System.out.println("    length : " + length); 
+        }
+        //-------------------------------------------------
+        int maxNum = length.get(0);
+        for (int i = 1; i < length.size(); i++) {
+            if (maxNum < length.get(i))
+                maxNum = length.get(i);
+        }
+        System.out.println("Max digit length of numbers = "
+                + maxNum);
+        checkK(k, maxNum);
+        //------------------------------------------------
+        ArrayList<String> myStringList = new ArrayList<String>();
+        for (int i = 0; i < size; i++) {
+            String a = Integer.toString(myList.get(i));
+            myStringList.add(a);
+        }
+        System.out.println(myStringList);   
+        //arraylist numbers in string
+        //----------------------------------------------------
+        ArrayList<String> noZeroList = new ArrayList<String>();
+        for (int i = 0; i < size; i++) {
+            if (myStringList.get(i).contains("0")) {
+                System.out.println(myStringList.get(i)
+                        + " is not near-self-dividing number");
+            }
+            else{
+                noZeroList.add(myStringList.get(i));
+            }
+        }
+        
+        ArrayList<Integer> nearSelf = new ArrayList<Integer>();
+        ArrayList<Integer> newList = new ArrayList<Integer>();
+        //--------------------------------------------------
+        for(int i =0; i <noZeroList.size(); i ++){
+            String temp = noZeroList.get(i);
+            newList.add(Integer.parseInt(temp));
+        }
+        System.out.println("new list : " + newList);  
+        //newList are the integer ArrayList which does not include the zero digit integers
+       //----------------------------------------------
+        int u = 0;
+        int counter = 0;
+        
+        for (int i = 0; i < newList.size(); i++) {
+            if (newList.get(i) < 0) {
+                System.out.println("Please input positive number only");
+
+            }
+
+             u = newList.get(i);
+            counter = 0;   
+            while (u > 0) {
+
+                int temp1 = u%10;
+                System.out.print(temp1);
+
+                int residual = u%temp1;
+                if (residual==0){
+                                 System.out.print ( " Divisable")      ;
+                                 System.out.println("");
+                                 counter++;
+                }
+                else if (residual!=0)
+                {          System.out.print ( " Not Divisable");
+                                 System.out.println("");
+                                 
+                }
+                if(counter >=k+1){
+                                nearSelf.add(newList.get(i));
+                }
+                
+                u /= 10;
+            }
+        }
+        System.out.println("Near-self division number is : " );
+            System.out.println(nearSelf) ;
+        // for checking the ugly numbers
+        for (int i = 0; i <size; i ++){
+            if (myList.get(i) < 10 && myList.get(i) != 7 && newList.get(i) > 0) {
+                System.out.println(newList.get(i) + "is ugly number");
+            }
+
+            if (myList.get(i)%2==0 || myList.get(i)%2==0 || myList.get(i)%2==0){
+
+                System.out.println( "ugly number is : "  );
+                System.out.println(myList.get(i));
+            }
+        }
+    }
+
+}
+    
+
+
