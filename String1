@@ -1,0 +1,74 @@
+import java.util.*;
+    public class String1{
+        public static void main(String[] args) {
+            System.out.println("Input an ID : ");
+            Scanner input = new Scanner(System.in);
+            String myStr = input.nextLine();
+            char[] myChar = new char[10];
+            System.out.print("Original sentence: ");
+            for (int i = 0; i < 10; i++) {
+                myChar[i] = myStr.charAt(i);
+                System.out.print(myChar[i]); 
+            }
+            System.out.println();
+            System.out.println("----------------");
+
+            System.out.print("# if isDigit : ");
+            int numIndex = 0;  //global level
+            for (int i = 0; i < 10; i++) {
+                System.out.print('#');
+                if (Character.isDigit(myStr.charAt(i)) == true) {
+                    System.out.print(myStr.charAt(i));
+                    numIndex = i;
+                    System.out.println("  The index of the digit is = " + i);
+                } // end of if
+                
+            }  // end of forloop
+            System.out.println("numIndex = " + numIndex);
+            String firstPart = new String();
+            String secondPart = new String();
+            firstPart = myStr.substring(0, numIndex);
+            System.out.println("first part = " + firstPart);
+
+            secondPart = myStr.substring(numIndex + 1, myStr.length());
+            System.out.println("Secondpart = " + secondPart);
+            String pureAlpha = new String();
+            pureAlpha = firstPart + secondPart;
+            System.out.println("pureAlpha = " + pureAlpha);
+
+            char num = myStr.charAt(numIndex);
+            int num1 = Integer.parseInt(String.valueOf(num));
+            System.out.println("number is " + num1);
+            char output1 = pureAlpha.charAt(num1 - 1);
+            System.out.println("output1: " + output1);
+            
+            
+            //----------------------------------------------------------------
+            System.out.print("Output2 : ");
+            if (num1 % 2 != 0 || num1 == 1) {
+                System.out.println("is even");
+
+                for (int i = 0; i < 9; i++) {
+                    if (Character.isLowerCase(pureAlpha.charAt(i))) {
+
+                        System.out.print(Character.toUpperCase(pureAlpha.charAt(i)));
+                    } else {
+                        System.out.print(Character.toLowerCase(pureAlpha.charAt(i)));
+
+                    }
+                }
+            }
+            if (num1 % 2 == 0) {
+
+                for (int i = 8; i >= 0; i--) {
+                    if (Character.isLowerCase(pureAlpha.charAt(i))) {
+
+                        System.out.print(Character.toUpperCase(pureAlpha.charAt(i)));
+                    } else {
+                        System.out.print(Character.toLowerCase(pureAlpha.charAt(i)));
+
+                    }
+                }
+            }
+
+        }
